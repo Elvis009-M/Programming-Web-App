@@ -130,7 +130,7 @@ const quizEngine = {
 
 
         // --- DATABASE SYNC LOGIC ---
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxZKLP738nQlA28QUEhBijjtb-feGkd5Ytf9CB2aq9qgVkVOFU4Wr6_CmU5BBQq6qa6/exec'; // <--- Paste URL here
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx5LOOM5UyN95UcAlK8MJg813NlnmAddK8x6uGJVZTfzpjQcAe8E76U4aaXGsDx30dp/exec'; // <--- Paste URL here
 
         const dataToSend = {
             name: this.userName,
