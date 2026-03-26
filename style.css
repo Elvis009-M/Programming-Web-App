@@ -1,0 +1,209 @@
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #3730a3;
+    --success: #10b981;
+    --danger: #ef4444;
+    --bg: #0f172a;
+    --card: rgba(30, 41, 59, 0.8);
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top right, #1e293b, #0f172a);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.hidden { display: none !important; }
+
+/* LAYOUT */
+.screen {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; min-height: 100vh; padding: 40px 20px;
+}
+
+.glass-card {
+    background: var(--card); backdrop-filter: blur(12px);
+    border: 1px solid var(--border); border-radius: 24px;
+    padding: 40px; width: 100%; max-width: 500px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+    text-align: center;
+}
+.glass-card.wide { max-width: 850px; }
+
+/* MODAL POP-UP SYSTEM */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center; z-index: 1000;
+}
+.modal-content { animation: popIn 0.3s ease-out; }
+
+@keyframes popIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* COMPONENTS */
+.portal-logo { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px; border: 2px solid var(--primary); }
+
+.config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0; text-align: left; }
+
+input, select {
+    width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border);
+    background: #1e293b; color: white; margin-top: 5px;
+}
+
+button { padding: 14px 25px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.primary-btn { background: var(--primary); color: white; width: 100%; }
+.primary-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+.outline-btn { background: transparent; border: 1px solid var(--border); color: white; }
+
+/* QUIZ UI */
+.quiz-header { display: flex; justify-content: space-between; margin-bottom: 25px; align-items: center; }
+.timer-box { background: rgba(239, 68, 68, 0.15); color: var(--danger); padding: 5px 15px; border-radius: 8px; font-weight: 700; }
+.question-main { font-size: 1.3rem; font-weight: 700; text-align: left; margin-bottom: 25px; }
+.option-btn {
+    display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 10px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; border-radius: 10px;
+}
+.option-btn.active { background: var(--primary); border-color: var(--primary); }
+.nav-controls { display: flex; justify-content: space-between; margin-top: 20px; gap: 10px; }
+
+/* REVIEW LIST */
+#review-list { margin-top: 30px; text-align: left; }
+.review-item { background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px; margin-bottom: 20px; border-left: 5px solid #444; }
+.review-item.correct { border-left-color: var(--success); }
+.review-item.wrong { border-left-color: var(--danger); }
+.explanation-box { margin-top: 10px; padding: 12px; background: rgba(79, 70, 229, 0.1); border-radius: 8px; font-size: 0.9rem; color: #cbd5e1; }
+
+.footer-credit { margin-top: 25px; font-size: 0.8rem; color: var(--text-muted); }
+.footer-credit a { color: var(--primary); text-decoration: none; }
+
+.result-footer-btns { display: flex; gap: 15px; width: 100%; margin-top: 30px; }
+
+
+/* --- GLOBAL BRANDING --- */
+.global-branding {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    background: rgba(15, 23, 42, 0.9); /* Matches theme bg */
+    backdrop-filter: blur(5px);
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    z-index: 10001; /* Above the Quiz Modal */
+}
+
+.global-branding a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* --- RESPONSIVENESS (MOBILE FRIENDLY) --- */
+
+/* For devices smaller than 600px width */
+@media (max-width: 600px) {
+    .glass-card {
+        padding: 20px;
+        border-radius: 15px;
+        width: 95%; /* Give some breathing room on edges */
+    }
+
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+
+    .config-grid {
+        grid-template-columns: 1fr; /* Stack inputs vertically on mobile */
+        gap: 10px;
+    }
+
+    .question-main {
+        font-size: 1.1rem; /* Slightly smaller text for long questions */
+    }
+
+    .option-btn {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    .nav-controls {
+        flex-direction: column-reverse; /* Stack buttons on mobile */
+        gap: 10px;
+    }
+
+    .nav-controls button {
+        width: 100%; /* Full width buttons for easier thumb tapping */
+    }
+
+    .modal-overlay {
+        padding: 10px; /* Ensure modal doesn't touch screen edges */
+    }
+    
+    .score-display h1 {
+        font-size: 3rem;
+    }
+
+    /* Adjust bottom padding so content doesn't hide behind the footer */
+    .screen {
+        padding-bottom: 80px; 
+    }
+    .modal-content {
+        margin-bottom: 60px;
+    }
+}
+
+/* For extremely small screens (older phones) */
+@media (max-width: 360px) {
+    .question-main {
+        font-size: 1rem;
+    }
+    .timer-box {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+    }
+}
+
+
+.modal-content {
+    animation: popIn 0.3s ease-out;
+    max-height: 85vh; /* Prevents pop-up from going off-screen */
+    overflow-y: auto; /* Allows scrolling inside the pop-up if question is long */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure the review items wrap text properly on mobile */
+.review-item {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+
+/* Mobile-friendly Sync Status */
+#sync-status {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: var(--success);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 10002; /* Above everything else */
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMAKK | C++ Professional Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section id="login-screen" class="screen">
+        <div class="glass-card">
+            <img src="images/Emakk_C++.png" alt="Logo" class="portal-logo" onerror="this.src='https://via.placeholder.com/80'">
+            <h1>Academic Portal</h1>
+            <p>Verify identity to access the examination</p>
+            <input type="text" id="user-name" placeholder="Enter Full Name" autocomplete="off">
+            <button class="primary-btn" onclick="quizEngine.login()">Access Examination</button>
+            <div class="footer-credit">
+                Built by <a href="https://emakk.vercel.app" target="_blank">EMAKK Solutions</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="screen hidden">
+        <div class="glass-card wide">
+            <h2>Welcome, <span id="player-name"></span></h2>
+            <div class="config-grid">
+                <div class="input-group">
+                    <label>Module</label>
+                    <select id="topic-select">
+                        <option value="all">All Comprehensive Modules</option>
+                        <option value="Basics">Intro & History</option>
+                        <option value="C++ Intro">C++ Structure</option>
+                        <option value="Data Types">Data Types & Variables</option>
+                        <option value="Operations">Operators</option>
+                        <option value="Flow Control">Selection & Loops</option>
+                        <option value="Arrays">Arrays & Strings</option>
+                        <option value="Advanced">Pointers & Structs</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Difficulty</label>
+                    <select id="diff-select">
+                        <option value="all">Mixed Complexity</option>
+                        <option value="Easy">Standard</option>
+                        <option value="Medium">Intermediate</option>
+                        <option value="Hard">Advanced</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Count</label>
+                    <select id="count-select">
+                        <option value="10">10 Questions</option>
+                        <option value="20">20 Questions</option>
+                        <option value="50">50 Questions</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Time</label>
+                    <select id="time-select">
+                        <option value="5">5 Minutes</option>
+                        <option value="15">15 Minutes</option>
+                        <option value="30">30 Minutes</option>
+                    </select>
+                </div>
+            </div>
+            <button class="primary-btn" onclick="quizEngine.startQuiz()">Start Examination</button>
+            <div class="footer-credit">
+                Official Portal: <a href="https://emakk.vercel.app" target="_blank">emakk.com</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="quiz-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-card wide">
+            <div class="quiz-header">
+                <div class="status">Question <span id="q-num">1</span>/<span id="q-total">0</span></div>
+                <div id="timer" class="timer-box">00:00</div>
+            </div>
+            <div id="question-text" class="question-main"></div>
+            <div id="options-grid" class="options-layout"></div>
+            <div class="nav-controls">
+                <button id="prev-btn" class="outline-btn" onclick="quizEngine.prevQuestion()">Back</button>
+                <button id="next-btn" class="primary-btn" onclick="quizEngine.nextQuestion()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="result-screen" class="screen hidden">
+        <div class="glass-card wide results">
+            <h2>Examination Summary</h2>
+            <div class="score-display">
+                <h1 id="score-percent">0%</h1>
+                <p>Correct: <span id="res-correct"></span> / <span id="res-total"></span></p>
+            </div>
+            <div class="review-header">Detailed Review</div>
+            <div id="review-list"></div>
+            <div class="result-footer-btns">
+                <button onclick="quizEngine.goToDashboard()" class="primary-btn">Retake New Quiz</button>
+                <button onclick="quizEngine.logout()" class="outline-btn">Logout</button>
+            </div>
+        </div>
+    </section>
+
+<footer class="global-branding">
+    Built by <a href="https://emakk.vercel.app" target="_blank">EMAKK Solutions</a>
+</footer>
+
+    <script src="questions.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
