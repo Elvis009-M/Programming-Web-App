@@ -126,6 +126,7 @@ const quizEngine = {
         document.getElementById('res-total').innerText = this.filteredQuestions.length;
         this.toggleScreen('result-screen');
 
+        const selectedDifficulty = document.getElementById('diff-select').value;
 
 
         // --- DATABASE SYNC LOGIC ---
@@ -134,6 +135,7 @@ const quizEngine = {
         const dataToSend = {
             name: this.userName,
             topic: document.getElementById('topic-select').value,
+            difficulty: selectedDifficulty, // Added this line
             score: Math.round((correct / this.filteredQuestions.length) * 100),
             total: this.filteredQuestions.length
         };
